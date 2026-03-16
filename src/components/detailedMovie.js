@@ -1,4 +1,4 @@
-import { movieGenres } from "./Movie"
+import {movieGenres} from "./Movie"
 
 let container = document.querySelector(".container")
 let bgBox = document.querySelector(".bg-box")
@@ -41,7 +41,7 @@ export function DetailedMovie(item) {
     const diagrams = document.createElement("div");
     diagrams.className = "diagrams";
 
-    for (let i = 0; i < 3; i++) {
+    for(let i = 0; i < 3; i++) {
         const btn = document.createElement("button");
         btn.className = "diagram-btns";
         diagrams.appendChild(btn);
@@ -76,17 +76,13 @@ export function DetailedMovie(item) {
         "Studios: Amazon MGM Studios"
     ];
 
-    console.log(data);
 
 
     data.forEach(elem => {
         const p = document.createElement("p");
         p.className = "movie-parameters"
-        // let span = p.nextElementSibling
-        // span.textContent = elem
         p.textContent = elem;
         smallData.appendChild(p);
-        // smallData.appendChild(span);
     });
 
     /* append right side */
@@ -104,4 +100,24 @@ export function DetailedMovie(item) {
     container.append(parentBox, bottomContainer)
 
     return container
+}
+
+function actors(item) {
+    let box = document.createElement("div")
+    let up_box = document.createElement("div")
+
+    let h1 = document.createElement("h1")
+    let p = document.createElement("p")
+    let btn = document.createElement("span")
+
+    let actor_box = document.createElement("div")
+    let img = document.createElement("img")
+    let name = document.createElement("p")
+    let origin_name = document.createElement("p")
+
+    box.className = "starrings"
+    up_box.className = "starrings-title"
+    btn.className = "all-starrings-btn"
+    actor_box.className = "actor-box"
+    img.hhhhhhhclassName = "actor-img"
 }
