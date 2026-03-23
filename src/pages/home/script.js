@@ -1,8 +1,10 @@
 import Swiper from 'swiper';
-import { Scrollbar, FreeMode } from 'swiper/modules';
+import { Scrollbar, FreeMode, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/scrollbar';
 import 'swiper/css/free-mode';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 import { render } from '../../libs/render';
 import { popularPeople, popularPeoples } from '../../components/popularity';
 import { api } from '../../libs/api';
@@ -38,6 +40,49 @@ const swiper = new Swiper('.trailers__swiper', {
         draggable: true,
     },
 });
+// const swiper_2 = new Swiper('.popular-movies-swiper', {
+//     direction: 'horizontal',
+//     loop: false,
+//     modules: [FreeMode, Pagination, Navigation],
+
+//     slidesPerView: 8,
+//     spaceBetween: 20,
+//     grabCursor: true,
+
+//     freeMode: {
+//         enabled: true,
+//         momentum: true,
+//         momentumRatio: 0,
+//         momentumVelocityRatio: 0,
+//         momentumBounce: false,
+//     },
+//     pagination: {
+//         el: ".popular-movies-page-p",
+//         type: "fraction",
+//     },
+//     navigation: {
+//         nextEl: ".popular-movies-next-btn",
+//         prevEl: ".popular-movies-last-btn",
+//     },
+//     breakpoints: {
+//         320: {
+//             slidesPerView: 4,
+//             spaceBetween: 10,
+//         },
+//         640: {
+//             slidesPerView: 4,
+//             spaceBetween: 15,
+//         },
+//         1024: {
+//             slidesPerView: 4,
+//             spaceBetween: 20,
+//         },
+//         1280: {
+//             slidesPerView: 4,
+//             spaceBetween: 20,
+//         },
+//     },
+// });
 
 
 let popular_people_box1 = document.querySelector(".pop-people-left-box")
@@ -56,66 +101,22 @@ let upcomig_movies_next_btn = document.querySelector(".upcoming-movies-next-btn"
 let upcomig_movies_last_btn = document.querySelector(".upcoming-movies-last-btn")
 let upcomig_movies_page = document.querySelector(".upcoming-movies-page")
 
-
-// let search_waindow_btn = document.querySelector(".search")
-// let search_waindow = document.querySelector(".overhide")
-// let close_search_window = document.querySelector(".close-search-window")
-
-// search_waindow_btn.onclick = () => {
-//     search_waindow.classList.add("show")
-//     search_waindow.classList.remove("hide")
-// }
-// close_search_window.onclick = () => {
-//     search_waindow.classList.remove("show")
-//     search_waindow.classList.add("hide")
-// }
-
 let swiperWrapper = document.querySelector(".swiper-wrapper")
 let personApi = api.get("/person/popular")
 let popularMovieApi = api.get("movie/popular")
 let genresApi = api.get("/genre/movie/list")
 let upcomigMovieApi = api.get("/movie/upcoming")
+
 Promise.all([personApi, popularMovieApi, genresApi, upcomigMovieApi])
     .then(([personRes, popularMovieRes, genresRes, upcomigMovieRes]) => {
-        console.log(personRes, popularMovieRes, genresRes, upcomigMovieRes);
-
         render(personRes.data.results.slice(0, 2), popular_people_box1, popularPeople)
         render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
 
         render(popularMovieRes.data.results, cardBox, Movie)
-        render(popularMovieRes.data.results.slice(0, 4), popular_movies_box, Movie)
+        render(popularMovieRes.data.results.slice(0, 16), popular_movies_box, Movie)
 
         render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
         render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
 
         render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
     })
-let searchTypes = document.querySelectorAll(".type")
-let searchInp = document.querySelector('.search-content')
-let searchResults = document.querySelector(".render-box")
-
-function changeType(type) {
-    console.log(type);
-
-    searchInp.onkeyup = () => {
-        api.get(`/search/${type}?query=${searchInp.value}`)
-            .then(res => {
-                console.log(res.data);
-                if (type == "movie") {
-                    render(Object.values(res.data.results), searchResults, SearchMovie)
-                } else if (type == "person") {
-                    render(Object.values(res.data.results), searchResults, searchPerson)
-                } else {
-                    render(Object.values(res.data.results), searchResults, SearchMovie)
-                }
-            })
-    }
-
-}
-changeType('movie')
-
-searchTypes.forEach((type, i) => {
-    type.onclick = () => {
-        changeType(type.id)
-    }
-})

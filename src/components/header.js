@@ -1,7 +1,5 @@
 let close_search_window = document.querySelector(".close-search-window")
 let search_waindow = document.querySelector(".overhide")
-console.log(search_waindow);
-console.log(close_search_window);
 
 export function header() {
     let header = document.querySelector("header")
@@ -42,10 +40,11 @@ export function header() {
             </ul>
         </div>
     </div>`
+
     let headCn = document.querySelector(".head-cn")
     const headerRight = document.createElement("div");
     headerRight.className = "header-right";
-    
+
     const searchBtn = document.createElement("button");
     searchBtn.className = "search";
     close_search_window.onclick = () => {
@@ -55,9 +54,9 @@ export function header() {
     searchBtn.onclick = () => {
         search_waindow.classList.add("show")
         search_waindow.classList.remove("hide")
-            
+
         console.log(1);
-        
+
     }
     const loginBtn = document.createElement("button");
     loginBtn.className = "login";
@@ -65,4 +64,31 @@ export function header() {
     headerRight.appendChild(searchBtn);
     headerRight.appendChild(loginBtn);
     headCn.append(headerRight)
+
+    let searchTypes = document.querySelectorAll(".type")
+    let searchInp = document.querySelector('.search-content')
+    let searchResults = document.querySelector(".render-box")
+
+    function changeType(type) {
+        searchInp.onkeyup = () => {
+            api.get(`/search/${type}?query=${searchInp.value}`)
+                .then(res => {
+                    if (type == "movie") {
+                        render(Object.values(res.data.results), searchResults, SearchMovie)
+                    } else if (type == "person") {
+                        render(Object.values(res.data.results), searchResults, searchPerson)
+                    } else {
+                        render(Object.values(res.data.results), searchResults, SearchMovie)
+                    }
+                })
+        }
+
+    }
+    changeType('movie')
+
+    searchTypes.forEach((type, i) => {
+        type.onclick = () => {
+            changeType(type.id)
+        }
+    })
 }
