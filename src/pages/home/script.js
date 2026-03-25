@@ -15,10 +15,10 @@ import { Trailer } from '../../components/Trailer';
 import { genres } from '../../components/genres';
 import { SearchMovie } from '../../components/searchMovie';
 import { searchPerson } from '../../components/searchPerson';
+import { popularMovie } from '../../components/popularMovies';
 header()
-footer()
 
-const swiper = new Swiper('.trailers__swiper', {
+const swiper_1 = new Swiper('.trailers__swiper', {
     direction: 'horizontal',
     loop: false,
     modules: [Scrollbar, FreeMode],
@@ -40,50 +40,50 @@ const swiper = new Swiper('.trailers__swiper', {
         draggable: true,
     },
 });
-// const swiper_2 = new Swiper('.popular-movies-swiper', {
-//     direction: 'horizontal',
-//     loop: false,
-//     modules: [FreeMode, Pagination, Navigation],
 
-//     slidesPerView: 8,
-//     spaceBetween: 20,
-//     grabCursor: true,
+const totalSlides = 4;
+const swiper_2 = new Swiper('.swiper__movie', {
+    direction: 'horizontal',
+    loop: true,              // зацикливание
+    speed: 1000,
+    modules: [Navigation, Pagination],
+    grabCursor: true,
 
-//     freeMode: {
-//         enabled: true,
-//         momentum: true,
-//         momentumRatio: 0,
-//         momentumVelocityRatio: 0,
-//         momentumBounce: false,
-//     },
-//     pagination: {
-//         el: ".popular-movies-page-p",
-//         type: "fraction",
-//     },
-//     navigation: {
-//         nextEl: ".popular-movies-next-btn",
-//         prevEl: ".popular-movies-last-btn",
-//     },
-//     breakpoints: {
-//         320: {
-//             slidesPerView: 4,
-//             spaceBetween: 10,
-//         },
-//         640: {
-//             slidesPerView: 4,
-//             spaceBetween: 15,
-//         },
-//         1024: {
-//             slidesPerView: 4,
-//             spaceBetween: 20,
-//         },
-//         1280: {
-//             slidesPerView: 4,
-//             spaceBetween: 20,
-//         },
-//     },
-// });
+    slidesPerView: 4,
+    slidesPerGroup: 4,
+    spaceBetween: 20,
 
+    navigation: {
+        nextEl: ".pop-movie-btn-prev",
+        prevEl: ".pop-movie-btn-next",
+    },
+
+    pagination: {
+        el: ".popular-movie-pagination",
+        type: "fraction",
+    },
+});
+const swiper_3 = new Swiper('.swiper__upcoming-movie', {
+    direction: 'horizontal',
+    loop: true,              // зацикливание
+    speed: 1000,
+    modules: [Navigation, Pagination],
+    grabCursor: true,
+
+    slidesPerView: 4,
+    slidesPerGroup: 4,
+    spaceBetween: 20,
+
+    navigation: {
+        nextEl: ".upcoming-movie-btn-next",
+        prevEl: ".upcoming-movie-btn-prev",
+    },
+
+    pagination: {
+        el: ".upcoming-movies-pagination",
+        type: "fraction",
+    },
+});
 
 let popular_people_box1 = document.querySelector(".pop-people-left-box")
 let popular_people_box2 = document.querySelector(".pop-people-right-box")
@@ -92,14 +92,7 @@ let cardBox = document.querySelector(".card-box")
 let geanre_list = document.querySelector(".genre-list")
 
 let popular_movies_box = document.querySelector(".popular-movies-box")
-let popular_movies_next_btn = document.querySelector(".popular-movies-next-btn")
-let popular_movies_last_btn = document.querySelector(".popular-movies-last-btn")
-let popular_movies_page = document.querySelector(".popular-movies-page")
-
 let upcomig_movies_box = document.querySelector(".upcoming-movies-box")
-let upcomig_movies_next_btn = document.querySelector(".upcoming-movies-next-btn")
-let upcomig_movies_last_btn = document.querySelector(".upcoming-movies-last-btn")
-let upcomig_movies_page = document.querySelector(".upcoming-movies-page")
 
 let swiperWrapper = document.querySelector(".swiper-wrapper")
 let personApi = api.get("/person/popular")
@@ -113,10 +106,10 @@ Promise.all([personApi, popularMovieApi, genresApi, upcomigMovieApi])
         render(personRes.data.results.slice(2, 6), popular_people_box2, popularPeoples)
 
         render(popularMovieRes.data.results, cardBox, Movie)
-        render(popularMovieRes.data.results.slice(0, 16), popular_movies_box, Movie)
+        render(popularMovieRes.data.results.slice(0, 16), popular_movies_box, popularMovie)
 
         render(upcomigMovieRes.data.results, swiperWrapper, Trailer)
-        render(upcomigMovieRes.data.results.slice(0, 4), upcomig_movies_box, Movie)
+        render(upcomigMovieRes.data.results.slice(0, 12), upcomig_movies_box, popularMovie)
 
         render(genresRes.data.genres.slice(0, 6), geanre_list, genres)
     })

@@ -39,14 +39,19 @@ export function header() {
                 <li><a href="/" class="center-link">Search</a></li>
             </ul>
         </div>
-    </div>`
+    </div>
+    `
 
     let headCn = document.querySelector(".head-cn")
     const headerRight = document.createElement("div");
     headerRight.className = "header-right";
 
     const searchBtn = document.createElement("button");
-    searchBtn.className = "search";
+    searchBtn.className = "serch-open";
+
+    const head = document.querySelector("header");
+    head.appendChild(searchBtn);
+
     close_search_window.onclick = () => {
         search_waindow.classList.remove("show")
         search_waindow.classList.add("hide")
@@ -54,9 +59,7 @@ export function header() {
     searchBtn.onclick = () => {
         search_waindow.classList.add("show")
         search_waindow.classList.remove("hide")
-
         console.log(1);
-
     }
     const loginBtn = document.createElement("button");
     loginBtn.className = "login";

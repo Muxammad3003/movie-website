@@ -177,8 +177,6 @@ body {
 /* ===== MOVIE CARD ===== */
 
 .movie-card {
-    /* position: relative; */
-
     width: 100%;
     font-family: 'Segoe UI', sans-serif;
 }
@@ -197,7 +195,7 @@ body {
     border-radius: 16px;
     overflow: hidden;
     height: 517px;
-    object-fit: cover   ;
+    object-fit: cover;
 }
 
 /* RATING */
@@ -231,6 +229,22 @@ body {
     color: #d4ff00;
     font-size: 14px;
     font-weight: 500;
+}
+
+.btn-all-films {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    margin-top: 70px;
+    width: 200px;
+    height: 70px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 10px;
 }
 
 
@@ -286,7 +300,6 @@ body {
 
 .trailers {
     padding: 40px 0;
-    margin-top: 50px;
     margin-bottom: 50px;
 }
 
@@ -344,7 +357,22 @@ body {
     padding-bottom: 35px !important;
 }
 
-.swiper-slide img {
+.swiper-movie {
+    overflow: visible;
+    padding: 20px 0;
+}
+
+.swiper-movie .swiper-wrapper {
+    align-items: stretch;
+}
+
+.swiper-movie .swiper-slide {
+    height: auto;
+    width: auto;
+    min-width: 0;
+}
+
+.trailers-photo img {
     max-width: 300px;
     height: 200px;
     object-fit: cover;
@@ -353,7 +381,7 @@ body {
     cursor: pointer;
 }
 
-.swiper-slide__title {
+.trailers-photo__title {
     color: #fff;
     margin-top: 10px;
     font-size: 20px;
@@ -457,7 +485,7 @@ body {
 
 /* new trailers */
 .new-trailers {
-    margin-top: 80px;
+    margin-bottom: 80px;
 
     .new-tariler-up-box {
         display: flex;
@@ -485,21 +513,45 @@ body {
 }
 
 /* popular movies */
+.popular-movie-container{
+    margin-bottom: 80px;
+}
 .popular-movies-box {
-    display: flex;
-    gap: 20px;
     align-items: center;
     margin-bottom: 50px;
+    max-width: 1440px;
 }
 
+.swiper__movie {
+    max-width: 1440px;
+    position: relative;
+}
 
-.popular-movies-page-btns {
+.pop-movie-swiper-btns {
     display: flex;
+    align-items: center;
     justify-content: center;
+    gap: 20px;
+}
+
+.popular-movies-last-btn {
+    width: 23px;
+}
+
+.popular-movies-next-btn {
+    width: 23px;
+}
+
+.pop-movie-swiper-btns .popular-movie-pagination {
     color: white;
     font-size: 18px;
-    font-weight: 600;
-    gap: 23px;
+    width: auto;
+    margin-bottom: 5px;
+}
+
+.poster img {
+    height: 463px;
+    object-fit: cover;
 }
 
 .defis {
@@ -511,14 +563,12 @@ body {
 
 /* upcomig movies */
 .upcoming-movies {
-    margin-top: 60px;
+    position: relative;
 }
 
 .upcoming-movies-box {
     display: flex;
-    gap: 20px;
     align-items: center;
-    margin-bottom: 50px;
 }
 
 .upcoming-upper-box {
@@ -593,7 +643,7 @@ body {
     font-weight: 800;
     text-decoration: none;
     color: #4c6fff;
-    
+
     img {
         width: 30px;
         margin-right: 3px;
@@ -667,4 +717,36 @@ body {
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
+}
+
+/* ===== Swiper Navigation ===== */
+.movies-next-btn,
+.movies-last-btn {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.movies-next-btn img,
+.movies-last-btn img {
+    width: 30px;
+    height: 30px;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.movies-next-btn:hover img,
+.movies-last-btn:hover img {
+    opacity: 1;
+}
+
+.swiper-pagination {
+    text-align: center;
+    color: #fff;
+    font-size: 16px;
+    padding-top: 20px;
 }

@@ -196,6 +196,17 @@ header {
   content: "🔍";
   font-size: 16px;
 }
+.serch-open {
+    background: #ffffff url(	https://kinoarea.com/front/img/icons/search.svg) no-repeat center center / 16px 16px;
+    ;
+    border: none;
+    display: block;
+    transition: 0.2s;
+    padding: 1px 6px;
+    width: 45px;
+    height: 40px;
+    border-radius: 10px;
+}
 
 .login {
   width: 100px;

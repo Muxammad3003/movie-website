@@ -20,7 +20,6 @@ export const movieGenres = {
     37: "Western"
 };
 export function Movie(item) {
-
     const movieCard = document.createElement("div");
     movieCard.className = "movie-card";
 

@@ -12,9 +12,9 @@ export function movieStarrings(item) {
 
     const img = document.createElement("img");
     img.className = "actor-img";
-    if(item.profile_path){
+    if (item.profile_path) {
         img.src = `https://image.tmdb.org/t/p/original${item.profile_path}`
-    }else{
+    } else {
         img.classList.add("not-found")
     }
     img.alt = "actor-img";
@@ -87,8 +87,6 @@ export function DetailedMovie(item) {
     const trailerBtn = document.createElement("button");
     trailerBtn.className = "trailer-btn";
     trailerBtn.textContent = "Watch Trailer";
-    
-    
 
     const smallData = document.createElement("div");
     smallData.className = "small-data";
@@ -113,7 +111,7 @@ export function DetailedMovie(item) {
         p.className = "movie-parameters"
         p.textContent = elem;
         smallData.appendChild(p);
-        
+
     });
 
     right.appendChild(navigation);
@@ -149,6 +147,9 @@ export function DetailedMovie(item) {
     const allActors = document.createElement("p");
     allActors.className = "movie-star-p";
     allActors.textContent = "All actors "
+    allActors.onclick = () => {
+        window.location.href = "/all-details"
+    }
 
     const span = document.createElement("span");
     span.className = "new-trailer-p-span";
@@ -160,6 +161,30 @@ export function DetailedMovie(item) {
     headBox.appendChild(actor_title);
     headBox.appendChild(allActors);
     actors_container.appendChild(headBox);
+
+    // sections btns
+    const sections_name = ["Trailers", "Posters", "Photos"];
+    const sections = ["trailer-container", "movie-posters-container", "movie-photo-container"]
+
+    const container_btn = document.createElement('div');
+    container_btn.className = 'btn-of-sections'; 
+
+    sections_name.forEach((text, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'section-btn';
+        btn.textContent = text;
+
+        btn.onclick = () => {
+            document.querySelectorAll('.section-btn').forEach(b => b.classList.remove('active'));
+
+            const section = document.querySelector(`.${sections[index]}`);
+            if (section) {
+                section.scrollIntoView({ behavior: "smooth" });
+            }
+        };
+
+        container_btn.appendChild(btn);
+    });
 
     // trailer
     const trailer_container = document.createElement("div");
@@ -379,8 +404,9 @@ export function DetailedMovie(item) {
         .then(res => {
             let photos = res.data.backdrops.slice(0, 4);
             let amount = 0
+            let math = res.data.backdrops.length - 4;
+            photoOverlay.textContent = "+" + math
 
-            // Берём первые 3 обычные
             photos.forEach(poster => {
                 const photoImg = document.createElement('img');
                 photoImg.src = `https://image.tmdb.org/t/p/w500${poster.file_path}`;
@@ -391,24 +417,22 @@ export function DetailedMovie(item) {
             });
 
             if (amount == 4) {
-                let photos = document.querySelectorAll('.photo-img'); // получаем NodeList всех фото
+                let photos = document.querySelectorAll('.photo-img');
                 let lastPhoto = photos[photos.length - 1];
                 photoLastBox.appendChild(lastPhoto);
 
-                // добавляем последний блок в контейнер
                 photoBox.appendChild(photoLastBox);
             }
         });
 
-    // Сборка всего
     photoPhotosContainer.appendChild(photoName);
     photoPhotosContainer.appendChild(photoBox);
 
     photoContainer.appendChild(photoHeadBox);
     photoContainer.appendChild(photoPhotosContainer);
 
-    
-    container.append(parentBox, bottomContainer, actors_container, trailer_container, posterContainer, photoContainer)
+
+    container.append(parentBox, bottomContainer, actors_container, container_btn, trailer_container, posterContainer, photoContainer)
     let trailerSection = document.querySelector(".trailer-container")
     trailerBtn.onclick = () => {
         trailerSection.scrollIntoView({ behavior: "smooth" })

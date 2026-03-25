@@ -4,47 +4,39 @@
     <div class="container">
         <div class="cn-top">
             <div>
-
                 <h1 class="title">Movie in theaters</h1>
             </div>
-
             <p class="defis">_____</p>
-
             <div class="right">
-
                 <ul class="genre-list"></ul>
-
             </div>
         </div>
-        <div class="card-box">
-        </div>
+        <div class="card-box"></div>
+        <button class="btn-all-films">All</button>
     </div>
 
-    <div class="new-trailers container">
-        <div class="new-tariler-up-box">
-            <h1 class="h1">New trailers</h1>
-            <p class="new-trailer-p">All trailers <span style="font-size: 20px;"
-                    class="new-trailer-p-span">&#8594;</span></p>
-        </div>
-
-        <div class="new-trailer-video">
-            <iframe width="100%" height="617" src="https://www.youtube.com/embed/lcvUGs3xaDM?si=xGUQp_Nz25tvCwV6"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        </div>
-    </div>
 
     <section class="trailers">
+        <div class="new-trailers container">
+            <div class="new-tariler-up-box">
+                <h1 class="h1">New trailers</h1>
+                <p class="new-trailer-p">All trailers <span style="font-size: 20px;"
+                        class="new-trailer-p-span">&#8594;</span></p>
+            </div>
+
+            <div class="new-trailer-video">
+                <iframe width="100%" height="617" src="https://www.youtube.com/embed/lcvUGs3xaDM?si=xGUQp_Nz25tvCwV6"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
 
         <div class="container">
-
             <div class="trailers__header">
 
                 <div class="trailers__left">
-
                     <h2 class="trailers__title">Peaky Blinders: The Immortal Man</h2>
-
                     <div class="trailers__share">
 
                         <a href="#" class="trailers__share-btn">
@@ -111,7 +103,6 @@
                         </a>
 
                     </div>
-
                 </div>
 
                 <div class="trailers__votes">
@@ -133,50 +124,18 @@
                     </button>
 
                 </div>
-
             </div>
 
             <div class="swiper trailers__swiper">
-
-                <div class="swiper-wrapper">
-
-                    <div class="swiper-slide">
-                        <img src="/images/fear.jpg" alt="">
-                        <p class="swiper-slide__title">Fear</p>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <img src="/images/star-wars.webp" alt="">
-                        <p class="swiper-slide__title">Star Wars</p>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <img src="/images/fight-club.jpg" alt="">
-                        <p class="swiper-slide__title">Fight Club</p>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <img src="/images/Inglourious-Basterds.jpg" alt="">
-                        <p class="swiper-slide__title">Inglourious Basterds</p>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <img src="/images/rush-hour.webp" alt="Scream 7">
-                        <p class="swiper-slide__title">Rush Hour</p>
-                    </div>
-
-                </div>
-
+                <div class="swiper-wrapper"></div>
                 <div class="swiper-scrollbar"></div>
-
             </div>
 
         </div>
-
     </section>
 
 
-    <div class="containerя">
+    <div class="container popular-movie-container">
         <div class="popular-upper-box">
             <h1 class="h1">Popular Movies</h1>
 
@@ -189,14 +148,27 @@
             </div>
         </div>
 
-        <div class="popular-movies-box"></div>
+        <div class="swiper swiper__movie">
+            <div class="popular-movies-box swiper-wrapper"></div>
 
-        <div class="popular-movies-page-btns">
-            <img src="https://kinoarea.com/front/img/icons/arrow-left.svg" alt="" class="popular-movies-last-btn">
-            <p class="popular-movies-page-p"><span class="popular-movies-page">1</span>/4</p>
-            <img src="https://kinoarea.com/front/img/icons/arrow-right.svg" alt="" class="popular-movies-next-btn">
+            <div class="pop-movie-swiper-btns">
+                <div class="pop-movie-btn-next">
+                    <img src="https://kinoarea.com/front/img/icons/arrow-left.svg" alt=""
+                        class="popular-movies-last-btn">
+                </div>
+
+                <div class="popular-movie-pagination"></div>
+
+                <div class="pop-movie-btn-prev">
+                    <img src="https://kinoarea.com/front/img/icons/arrow-right.svg" alt=""
+                        class="popular-movies-next-btn">
+                </div>
+            </div>
         </div>
+
     </div>
+
+
 
     <div class="overhide hide">
         <div class="search-container">
@@ -216,7 +188,7 @@
                 <div class="type" id="person">People</div>
             </div>
             <div class="render-box">
-                
+
             </div>
         </div>
 
@@ -239,54 +211,85 @@
             <div class="pop-people-right-box"></div>
         </div>
     </div>
-    </div>
+</main> 
 
-    <div class="upcoming-movies container">
-        <div class="upcoming-upper-box">
-            <h1 class="h1">Upcoming Movies</h1>
 
-            <div class="upcoming-movies-page-btns">
-                <img src="https://kinoarea.com/front/img/icons/arrow-left.svg" alt="" class="upcoming-movies-last-btn">
-                <p class="upcoming-movies-page-p"><span class="upcoming-movies-page">1</span>/3</p>
-                <img src="https://kinoarea.com/front/img/icons/arrow-right.svg" alt="" class="upcoming-movies-next-btn">
-            </div>
-        </div>
+    <footer class="footer">
+        <div class="upcoming-movies container">
+            <div class="upcoming-upper-box">
+                <h1 class="h1">Upcoming Movies</h1>
 
-        <div class="upcoming-movies-box"></div>
+                <div class="upcoming-movies-page-btns">
+                    <div class="upcoming-movie-btn-prev">
+                        <img src="https://kinoarea.com/front/img/icons/arrow-left.svg" alt=""
+                            class="upcoming-movies-last-btn">
+                    </div>
 
-    </div>
+                    <div class="upcoming-movies-pagination"><span class="upcoming-movies-page">1</span>/3</div>
 
-    </div>
-
-    <section class="newsletter">
-        <div class="newsletter__overlay">
-            <div class="newsletter__box">
-
-                <div class="newsletter__logo">
-                    <span>Kino</span>area
+                    <div class="upcoming-movie-btn-next">
+                        <img src="https://kinoarea.com/front/img/icons/arrow-right.svg" alt=""
+                            class="upcoming-movies-next-btn">
+                    </div>
                 </div>
-
-                <h2>Subscribe for free E-mail newsletter</h2>
-
-                <p>
-                    If you want to keep up to date with the latest movie news,
-                    fill out the form below and sign up for the free E-mail newsletter!
-                </p>
-
-                <form class="newsletter__form">
-                    <input type="email" placeholder="Enter your E-mail address">
-                    <button>Subscribe</button>
-                </form>
-
-                <label class="newsletter__agree">
-                    <input type="checkbox" checked>
-                    I agree to the terms <a href="#">privacy policies</a>
-                </label>
-
             </div>
+
+            <div class="swiper swiper__upcoming-movie">
+                <div class="swiper-wrapper upcoming-movies-box"></div>
+            </div>
+
         </div>
-    </section>
-</main>
 
+        </div>
 
-<footer class="footer"></footer>
+        <section class="newsletter">
+            <div class="newsletter__overlay">
+                <div class="newsletter__box">
+
+                    <div class="newsletter__logo">
+                        <span>Kino</span>area
+                    </div>
+
+                    <h2>Subscribe for free E-mail newsletter</h2>
+
+                    <p>
+                        If you want to keep up to date with the latest movie news,
+                        fill out the form below and sign up for the free E-mail newsletter!
+                    </p>
+
+                    <form class="newsletter__form">
+                        <input type="email" placeholder="Enter your E-mail address">
+                        <button>Subscribe</button>
+                    </form>
+
+                    <label class="newsletter__agree">
+                        <input type="checkbox" checked>
+                        I agree to the terms <a href="#">privacy policies</a>
+                    </label>
+                </div>
+            </div>
+        </section>
+<div class="footer__socials">
+    <a href="#"><i>f</i></a>
+    <a href="#"><i>w</i></a>
+    <a href="#"><i>x</i></a>
+    <a href="#"><i>r</i></a>
+    <a href="#"><i>m</i></a>
+</div>
+
+<div class="footer__menu">
+    <a href="#">Movie Catalog</a>
+    <a href="#">Media</a>
+    <a href="#">Celebrities</a>
+    <a href="#">Contact Us</a>
+</div>
+
+<div class="footer__copyright">
+    2026 © Kinoarea. All rights reserved
+</div>
+
+<div class="footer__links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Use</a>
+</div>
+</footer>
