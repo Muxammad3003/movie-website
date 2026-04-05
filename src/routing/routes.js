@@ -41,6 +41,62 @@ export const routes = [
             await import("../pages/all-details/script.js")
         }
     },
+    {
+        path: /^\/actor-page$/,
+        view: async (app) => {
+            const response = await fetch('/pages/actor-page/index.html')
+
+            app.innerHTML = await response.text()
+        },
+        loadStyles: async () => {
+            await import("../pages/actor-page/style.css")
+        },
+        loadScripts: async () => {
+            await import("../pages/actor-page/script.js")
+        }
+    },
+    {
+        path: /^\/certain-page$/,
+        view: async (app) => {
+            const response = await fetch('/pages/certain-page/index.html')
+
+            app.innerHTML = await response.text()
+        },
+        loadStyles: async () => {
+            await import("../pages/certain-page/style.css")
+        },
+        loadScripts: async () => {
+            await import("../pages/certain-page/script.js")
+        }
+    },
+    {
+        path: /^\/all-actors-page$/,
+        view: async (app) => {
+            const response = await fetch('/pages/all-actors-page/index.html')
+
+            app.innerHTML = await response.text()
+        },
+        loadStyles: async () => {
+            await import("../pages/all-actors-page/style.css")
+        },
+        loadScripts: async () => {
+            await import("../pages/all-actors-page/script.js")
+        }
+    },
+    {
+        path: /^\/premiere-films$/,
+        view: async (app) => {
+            const response = await fetch('/pages/premiere-films/index.html')
+
+            app.innerHTML = await response.text()
+        },
+        loadStyles: async () => {
+            await import("../pages/premiere-films/style.css")
+        },
+        loadScripts: async () => {
+            await import("../pages/premiere-films/script.js")
+        }
+    },
 ]
 
 export const notFound = {

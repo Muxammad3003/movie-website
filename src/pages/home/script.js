@@ -16,7 +16,9 @@ import { genres } from '../../components/genres';
 import { SearchMovie } from '../../components/searchMovie';
 import { searchPerson } from '../../components/searchPerson';
 import { popularMovie } from '../../components/popularMovies';
+import { footerWithSection } from '../../components/footer.section';
 header()
+footerWithSection()
 
 const swiper_1 = new Swiper('.trailers__swiper', {
     direction: 'horizontal',
@@ -41,10 +43,8 @@ const swiper_1 = new Swiper('.trailers__swiper', {
     },
 });
 
-const totalSlides = 4;
 const swiper_2 = new Swiper('.swiper__movie', {
     direction: 'horizontal',
-    loop: true,              // зацикливание
     speed: 1000,
     modules: [Navigation, Pagination],
     grabCursor: true,
@@ -65,7 +65,6 @@ const swiper_2 = new Swiper('.swiper__movie', {
 });
 const swiper_3 = new Swiper('.swiper__upcoming-movie', {
     direction: 'horizontal',
-    loop: true,              // зацикливание
     speed: 1000,
     modules: [Navigation, Pagination],
     grabCursor: true,
@@ -85,11 +84,15 @@ const swiper_3 = new Swiper('.swiper__upcoming-movie', {
     },
 });
 
+let btn_all_films = document.querySelector(".btn-all-films")
+btn_all_films.onclick = () => {
+    window.location.href = "/premiere-films"
+}
 let popular_people_box1 = document.querySelector(".pop-people-left-box")
 let popular_people_box2 = document.querySelector(".pop-people-right-box")
 
 let cardBox = document.querySelector(".card-box")
-let geanre_list = document.querySelector(".genre-list")
+export let geanre_list = document.querySelector(".genre-list")
 
 let popular_movies_box = document.querySelector(".popular-movies-box")
 let upcomig_movies_box = document.querySelector(".upcoming-movies-box")

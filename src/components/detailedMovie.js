@@ -1,10 +1,15 @@
+import { Chart, DoughnutController, ArcElement, Tooltip } from 'chart.js';
+
+// обязательно регистрируем контроллер и элементы
+Chart.register(DoughnutController, ArcElement, Tooltip);
 import { api } from "../libs/api";
 import { render } from "../libs/render";
 import { movieGenres } from "./Movie"
 
-let container = document.querySelector(".container")
+let container = document.querySelector(".movie-cn")
 let bgBox = document.querySelector(".bg-box")
 let movieId = JSON.parse(localStorage.getItem("movieId"))
+// let accountId = "22829553"
 
 export function movieStarrings(item) {
     const actorBox = document.createElement("div");
@@ -37,6 +42,11 @@ export function movieStarrings(item) {
 
     actorBox.appendChild(img);
     actorBox.appendChild(namesBox);
+
+    actorBox.onclick = () => {
+        window.location.href = "/actor-page"
+        localStorage.setItem('actorId', item.id)
+    }
 
     return actorBox;
 }
@@ -74,10 +84,65 @@ export function DetailedMovie(item) {
     const diagrams = document.createElement("div");
     diagrams.className = "diagrams";
 
-    for (let i = 0; i < 3; i++) {
-        const btn = document.createElement("button");
-        btn.className = "diagram-btns";
-        diagrams.appendChild(btn);
+    let rating_text = document.createElement('p')
+    rating_text.className = "rating-text"
+    rating_text.textContent = "Kinoarea"
+
+    const rating_box = document.createElement("div");
+    rating_box.className = "rating-box";
+    diagrams.appendChild(rating_box);
+
+    const rating = item.vote_average ? item.vote_average.toFixed(1) : "—";
+    const ratingVal = parseFloat(rating) || 0;
+    const radius = 22;
+    const circumference = 2 * Math.PI * radius;
+    const offset = circumference - (ratingVal / 10) * circumference;
+
+    let ratingColor = "#e74c3c";
+    if (ratingVal >= 7) ratingColor = "#2ecc71";
+    else if (ratingVal >= 5) ratingColor = "#f0c040";
+
+    const ratingBtn = document.createElement("div");
+    ratingBtn.className = "diagram-rating";
+
+    // Используем шаблонные строки с обратными кавычками
+    ratingBtn.innerHTML = `
+<svg width="75" height="70" viewBox="0 0 60 65">
+    <circle cx="28" cy="28" r="${radius}" fill="#1d2a44" stroke="#2b3d5c" stroke-width="4"/>
+    <circle cx="28" cy="28" r="${radius}" fill="none" stroke="${ratingColor}" stroke-width="4"
+        stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"
+        stroke-linecap="round" transform="rotate(-90 28 28)"/>
+</svg>
+<span class="diagram-rating-val">${rating}</span>
+`;
+
+    diagrams.appendChild(ratingBtn, rating_box);
+
+    const btn_1 = document.createElement("button");
+    btn_1.className = "diagram-btns watch-list";
+    let btn_1_img = document.createElement("img")
+    btn_1_img.className = "watch-list-img"
+    btn_1_img.src = "https://kinoarea.com/front/img/list.png"
+    btn_1.append(btn_1_img)
+    diagrams.appendChild(btn_1);
+
+    const btn_2 = document.createElement("button");
+    btn_2.className = "diagram-btns favourite";
+    btn_2.innerHTML = `
+    <svg width="22" height="20" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg" class="svgHart film__fav-icon ">
+    <path d="M20.197 2.36559C19.0786 1.15249 17.5439 0.484375 15.8753 0.484375C14.6281 0.484375 13.4859 0.878684 12.4803 1.65626C11.9729 2.04875 11.5132 2.52895 11.1078 3.08942C10.7026 2.52911 10.2427 2.04875 9.73514 1.65626C8.72975 0.878684 7.58754 0.484375 6.34032 0.484375C4.67176 0.484375 3.13689 1.15249 2.01841 2.36559C0.913293 3.56451 0.30452 5.20241 0.30452 6.97779C0.30452 8.80509 0.985495 10.4778 2.44751 12.242C3.75539 13.82 5.63512 15.422 7.81189 17.277C8.55518 17.9105 9.3977 18.6285 10.2725 19.3934C10.5036 19.5959 10.8002 19.7073 11.1078 19.7073C11.4152 19.7073 11.712 19.5959 11.9427 19.3938C12.8176 18.6287 13.6606 17.9103 14.4042 17.2765C16.5807 15.4218 18.4604 13.82 19.7683 12.2418C21.2303 10.4778 21.9111 8.80509 21.9111 6.97762C21.9111 5.20241 21.3023 3.56451 20.197 2.36559Z"></path> </svg>`
+    diagrams.appendChild(btn_2);
+    btn_2.onclick = () => {
+        btn_2.classList.add("fav-added")
+    }
+
+
+    const btn_3 = document.createElement("button");
+    btn_3.className = "diagram-btns choose";
+    btn_3.innerHTML = `<svg width="28" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="svgHart film__fav-icon film__exp-icon ">  <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"></path> </svg>`
+    diagrams.appendChild(btn_3);
+    btn_3.onclick = async () => {
+        btn_3.classList.add("choosen")
     }
 
     const description = document.createElement("p");
@@ -125,7 +190,7 @@ export function DetailedMovie(item) {
     parentBox.appendChild(right);
     bottomContainer.append(smallData)
 
-    // acctors
+    // actors
     const actors_container = document.createElement("div");
     actors_container.className = "movieSarrings-container container";
 
@@ -148,7 +213,7 @@ export function DetailedMovie(item) {
     allActors.className = "movie-star-p";
     allActors.textContent = "All actors "
     allActors.onclick = () => {
-        window.location.href = "/all-details"
+        window.location.href = `/all-details?type=credits&title=Actors&page=Actors`
     }
 
     const span = document.createElement("span");
@@ -167,7 +232,7 @@ export function DetailedMovie(item) {
     const sections = ["trailer-container", "movie-posters-container", "movie-photo-container"]
 
     const container_btn = document.createElement('div');
-    container_btn.className = 'btn-of-sections'; 
+    container_btn.className = 'btn-of-sections';
 
     sections_name.forEach((text, index) => {
         const btn = document.createElement('button');
@@ -207,6 +272,9 @@ export function DetailedMovie(item) {
     trailer_span.innerHTML = "&#8594;";
 
     p.appendChild(trailer_span);
+    p.onclick = () => {
+        window.location.href = `/all-details?type=videos&title=Trailers&page=All Trailers&filmname=${item.title}`
+    }
     trailer_headBox.appendChild(trailer_title);
     trailer_headBox.appendChild(p);
 
@@ -214,6 +282,8 @@ export function DetailedMovie(item) {
     iframe.width = "1430";
     iframe.height = "804";
     api.get(`/movie/${item.id}/videos`).then(res => {
+        console.log(res);
+
         const trailer = res.data.results.find(v => v.type === "Trailer" && v.site === "YouTube")
         if (trailer) {
             iframe.src = `https://www.youtube.com/embed/${trailer.key}`
@@ -322,6 +392,9 @@ export function DetailedMovie(item) {
     const posterP = document.createElement('p');
     posterP.classList.add('movie-posters-p');
     posterP.textContent = "All posters "
+    posterP.onclick = () => {
+        window.location.href = `/all-details?type=images&title=Posters&page=All Posters`
+    }
 
     const posterSpan = document.createElement('span');
     posterSpan.style.fontSize = '20px';
@@ -374,6 +447,10 @@ export function DetailedMovie(item) {
     let photoP = document.createElement('p');
     photoP.classList.add('movie-photo-p');
     photoP.innerHTML = `All photos <span style="font-size: 20px;" class="new-trailer-p-span">&#8594;</span>`;
+    photoP.onclick = () => {
+        window.location.href = `/all-details?type=images&title=Photos&page=All Photos`
+    }
+
 
     photoHeadBox.appendChild(photoH1);
     photoHeadBox.appendChild(photoP);
@@ -397,32 +474,28 @@ export function DetailedMovie(item) {
 
     let photoOverlay = document.createElement('div');
     photoOverlay.classList.add('photo-overhide');
-    photoOverlay.textContent = "+8";
     photoLastBox.appendChild(photoOverlay);
 
     api.get(`/movie/${movieId}/images`)
         .then(res => {
             let photos = res.data.backdrops.slice(0, 4);
-            let amount = 0
             let math = res.data.backdrops.length - 4;
-            photoOverlay.textContent = "+" + math
+            photoOverlay.textContent = "+" + math;
 
-            photos.forEach(poster => {
+            photos.forEach((poster, index) => {
                 const photoImg = document.createElement('img');
                 photoImg.src = `https://image.tmdb.org/t/p/w500${poster.file_path}`;
                 photoImg.alt = "poster not found";
                 photoImg.classList.add('photo-img');
-                photoBox.appendChild(photoImg);
-                amount += 1
+
+                // Если это последний из 4, добавляем его в overlay
+                if (index === 3) {
+                    photoLastBox.appendChild(photoImg);
+                    photoBox.appendChild(photoLastBox);
+                } else {
+                    photoBox.appendChild(photoImg);
+                }
             });
-
-            if (amount == 4) {
-                let photos = document.querySelectorAll('.photo-img');
-                let lastPhoto = photos[photos.length - 1];
-                photoLastBox.appendChild(lastPhoto);
-
-                photoBox.appendChild(photoLastBox);
-            }
         });
 
     photoPhotosContainer.appendChild(photoName);
@@ -437,6 +510,7 @@ export function DetailedMovie(item) {
     trailerBtn.onclick = () => {
         trailerSection.scrollIntoView({ behavior: "smooth" })
     }
+
     return container
 }
 

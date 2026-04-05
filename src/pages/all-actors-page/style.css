@@ -1,0 +1,97 @@
+.title {
+    font-size: 50px;
+    font-weight: 800;
+    color: white;
+}
+
+.footer {
+    margin-top: 50px;
+}
+
+.upper-box {
+    margin-bottom: 30px;
+    font-weight: 500;
+
+    .span::after {
+        display: inline-block;
+        content: "›";
+        color: #4f5b7c;
+        -webkit-transform: scale(1.5);
+        -ms-transform: scale(1.5);
+        transform: scale(1.5);
+        margin: 0 0.5em;
+    }
+}
+
+.way-to-file {
+    color: #4f5b7c;
+    display: flex;
+}
+
+.page {
+    color: white;
+}
+
+.title_2 {
+    color: white;
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 35px;
+}
+.name{
+    color: white;
+}
+
+/* actors */
+.datas-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 420px;
+    gap: 48px 50px;
+
+    .actor-box {
+        overflow: hidden;
+
+        .actor-img {
+            max-width: 247px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .actor-names-box {
+            display: flex;
+            flex-direction: column;
+
+            .name {
+                color: white;
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: 700;
+            }
+
+            .origin-name {
+                font-size: 14px;
+                text-decoration: none;
+                color: #FFFFFFB3;
+                font-weight: 500;
+            }
+        }
+    }
+}
+.btn-all-films {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px auto;
+    margin-top: 70px;
+    width: 200px;
+    height: 70px;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+

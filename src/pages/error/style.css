@@ -23,7 +23,27 @@
   transform: translateY(4px);
   box-shadow: 0 2px 0 #2e47a8;
 }
+.error-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 130px 0 110px 0;
+}
 
 .error {
   font-size: 150px;
+  color: white;
+  font-weight: 900;
+  line-height: 1;
+}
+.error-title{
+  font-size: 50px;
+  font-weight: 900;
+  color: white;
+}
+.error-second-title{
+  color: white;
+  font-size: 18px;
+  margin:24px 0 30px;
 }

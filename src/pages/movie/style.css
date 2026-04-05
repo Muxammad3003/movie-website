@@ -8,7 +8,7 @@
 
 .movie-cn {
     position: relative;
-    z-index: 20;
+    z-index: 15;
 }
 
 
@@ -72,8 +72,8 @@
 }
 
 .diagram-btns {
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     border-radius: 10px;
     border: none;
     background: #1d2a44;
@@ -81,10 +81,54 @@
     cursor: pointer;
     transition: 0.3s;
 }
+.favourite{
+    fill: white;
+}
+.favourite :hover{
+    transition: 0.2s;
+    fill: red;
+}
+.fav-added {
+    fill: red;
+}
+.choose :hover{
+    transition: 0.2s;
+    fill: yellow;
+}
+.choose{
+    fill: white;
+}
+.choosen{
+    fill: yellow;
+}
+.diagram-rating {
+    position: relative;
+    width: 68px;
+    height: 60px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diagram-rating svg {
+    position: absolute;
+    top: 0; left: 0;
+}
+
+.diagram-rating-val {
+    position: relative;
+    z-index: 1;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+}
 
 .diagram-btns:hover {
     background: #2d3f64;
 }
+
 
 .description {
     max-width: 600px;
@@ -96,6 +140,9 @@
 span {
     color: #ffffff;
 
+}
+.photo-img{
+    object-fit: cover;
 }
 
 .trailer-btn {

@@ -1,5 +1,9 @@
 export function popularPeople(item, arr) {
     const leftBox = document.createElement('div');
+    leftBox.onclick = () => {
+        window.location.href = "/actor-page"
+        localStorage.setItem('actorId', item.id)
+    }
     leftBox.className = 'pop-left';
     leftBox.innerHTML = `
         <p class="pop-place">${arr.indexOf(item) + 1} Place</p>
@@ -15,6 +19,11 @@ export function popularPeople(item, arr) {
 
 export function popularPeoples(item, arr) {
     const rightBox = document.createElement('div');
+    rightBox.onclick = () => {
+        window.location.href = "/actor-page"
+
+        localStorage.setItem('actorId', item.id)
+    }
     rightBox.className = 'pop-r-box';
     rightBox.innerHTML = `
     <img src= "https://image.tmdb.org/t/p/original${item.profile_path}" alt="" class="popular-people-img-right">
